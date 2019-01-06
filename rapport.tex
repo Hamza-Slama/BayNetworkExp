@@ -1,0 +1,334 @@
+\documentclass[final,oneside,onecolumn,11pt]{report}
+
+\usepackage{amsmath,amssymb}
+\usepackage{array,subfigure,tabularx,booktabs}
+\usepackage{natbib,fancyhdr,makeidx,xspace}
+\usepackage[margin=75pt]{geometry}
+% a modifier suivant si on utilise latex ou pdflatex
+\usepackage[pdftex]{graphicx}
+\usepackage[bookmarksopen,colorlinks,pdftex]{hyperref}
+
+\usepackage{mathpazo}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+
+%\graphicspath{ {C:/Users/Houssem Bouali/Desktop/projet chainbi/images/} }
+
+%\makeatletter
+%\def\@seccntformat#1{\llap{\hbox to 2em{\hss\expandafter\upshape\csname
+%       the#1\endcsname.\hspace*{6pt}}}}%
+%\makeatother
+
+\usepackage{lipsum}
+
+\begin{document}
+
+\begin{titlepage}
+\begin{flushright}
+Année universitaire : 2018 - 2019
+\end{flushright}
+\thispagestyle{empty}
+\begin{center}
+\rule[0.5ex]{\linewidth}{2pt}\vspace*{-\baselineskip}\vspace*{3.2pt}
+\rule[0.5ex]{\linewidth}{1pt}\\[\baselineskip]
+{\huge Ecole Nationale d'Ingénieurs de Sousse }\\[4mm]
+\rule[0.5ex]{\linewidth}{1pt}\vspace*{-\baselineskip}\vspace{3.2pt}
+\rule[0.5ex]{\linewidth}{2pt}\\
+\vspace{6.5mm}
+%\vspace{6.5mm}
+%\vspace{11mm}
+\includegraphics[scale=0.2]{logo-eniso.jpg}\\
+\end{center}
+
+\begin{center}
+\vspace{3cm}
+    {\LARGE\bf\sc Rapport projet module Intélligence artificielle Distribuée}\\
+    \vspace{0.9cm}
+    {\LARGE\bf\sc Les réseaux bayésiens}\\
+    \vspace{.2cm}
+    \vspace{1cm}
+    {\large Proposé par : CHAINBI Walid}\\
+    \vspace{1cm}
+    {\large Réalisé par : SLAMA Hamza - BOUALI Houssem}\\
+    \vspace{1cm}
+    {\large Groupe : IA3.1 - Ingénieurie des systèmes distribuées}
+    \vspace{.2cm}
+    \vspace{.2cm}
+   
+\end{center}
+%***********************************************************
+%*														   *
+%*                 Table des matiéres 					   *
+%*														   *
+%***********************************************************
+\tableofcontents
+% \cleardoublepage
+%\newpage
+\clearpage
+%\include{./sections/introduction}
+% \cleardoublepage
+% \newpage
+%\clearpage
+%\include{./sections/section1}
+% \cleardoublepage
+% \newpage
+%\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Liste des figures et des tableaux - Liste des abréviations
+% \cleardoublepage%
+%\newpage
+%\addcontentsline{toc}{section}{\listfigurename}
+\listoffigures
+%\cleardoublepage%
+%\listoftables
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\addcontentsline{toc}{section}{Introdution Générale}
+\begin{abstract}
+Depuis l'émergence de la robotique et de l'informatique, les chercheurs essaient d'injecter des notions d'intelligence humaine dans des machines. Étant conçue et fabriquée par l'homme, on qualifie cette forme d'intelligence comme "L'intelligence artificielle" ou IA.\\
+\\L'intelligence artificielle est souvent définie comme la science de créer et de programmer des ordinateurs capables d'accomplir des taches qui nécessitent l'intelligence quand elle doit être fait par un être humain: que ce soit faire des mathématiques, jouer aux échecs ou même juste parler.\\
+\\Depuis les débuts de l'IA dans les années 1950, ce domaine de recherche s'est enrichit avec des nombre incalculables de recherches et d'expériences qui ont était fait dans les derniers 60 ans. Aujourd'hui, il existe des ordinateurs capables de résoudre des équations et des problèmes en quelques dixièmes de secondes, dont l'homme était incapable de résoudre il y a 100 ans; il existe des ordinateurs capables de mener une discussion avec un humain, qui sont capables de répondre a des questions comme un humain; il y a même des ordinateurs capables de reconnaître son "propriétaire" juste par la voix.\\ 
+\\Effectivement, grâce à l'IA, il existe aujourd'hui des ordinateurs et des systèmes capables de faire des choses incroyables.
+Mais cette "intelligence" vient d'une source commun: l'homme, qui a transmis à ces ordinateurs ses propres capacités; c'est sûrement un des développements le plus important dans l'histoire moderne de l'humanité et qui continue à nous révolutionner la façon de vivre.
+
+\end{abstract}
+
+\end{titlepage}
+
+
+\chapter{Réseaux Bayesiens}
+
+\section{Introduction}
+
+L'émergence de l'intelligence artificielle a déclencher les recherches vers des applications et de nouvelles approches pour mieux améliorer la capacité d'apprentissage ainsi que la prise de décision par les machines. Parmi ces domaines, on trouve les réseaux bayésiens qui sont tout simplement le mariage entre la {\bf théorie des graphes} et la {\bf théorie des probabilités}.
+\section{Définition}
+
+Un réseau bayésien est un système représentant la connaissance et permettant de calculer des probabilités conditionnelles apportant des solutions à différentes sortes de problématiques.\\ 
+\\La structure de ce type de réseau est simple : un {\bf graphe} dans lequel les noeuds représentent des {\bf variables aléatoires}, et les arcs (le graphe est donc orienté) reliant ces dernières sont rattachées à des {\bf probabilités conditionnelles}. Notons que le graphe est acyclique : il ne contient pas de boucle. Les arcs représentent des relations entre variables qui sont soit déterministes, soit probabilistes. Ainsi, l'observation d'une ou plusieurs causes n'entraîne pas systématiquement l'effet ou les effets qui en dépendent, mais modifie seulement la probabilité de les observer.\\ 
+\\L'intérêt particulier des réseaux bayésiens est de tenir compte simultanément de connaissances a priori d'experts (dans le graphe) et de l'expérience contenue dans les données.\\
+\\Pour résumer, un réseau bayésien est un modèle probabiliste graphique permettant d'acquérir, de capitaliser et d'exploiter des connaissances, né du besoin de créer des systèmes experts à base de probabilités.
+
+
+\section{Historique}
+
+Dans son essai historique publié à titre posthume (Essay Towards Solving a Problem in the Doctrine of Chances, 1763), {\bf Thomas Bayes} a introduit à la fin du 18e siècle deux notions essentielles dans la théorie de la décision.\\
+\vspace{0.8cm}
+\\D'une part, il définit la {\bf probabilité} comme une notion liée à ce qu'on appellerait aujourd'hui l'utilité.  {\bf Le prix P} que je suis prêt à payer pour pouvoir bénéficier du {\bf gain R} que m'offrirait la survenance d'un {\bf événement incertain} définit selon Bayes la probabilité de cet événement, comme {\bf P/R}.\\
+\\D'autre part, il définit la notion de {\bf probabilité conditionnelle}, mettant en évidence le fait que la probabilité est attribuée à un événement à venir et incertain dépend du niveau d'information dont on dispose avant sa survenue. Cette notion est fondamentale car elle exprime le fait que {\bf l'incertitude} est spécifique à chacun, selon son {\bf niveau de connaissance}, et est donc plus proche d'une {\bf « croyance »} que d'une fréquence.\\
+\\En formalisant le lien intuitif entre {\bf « information »} et {\bf « probabilité »}, ou autrement dit entre {\bf « connaissance »} et {\bf « non-connaissance »}, Bayes pose les bases de toute {\bf théorie de la décision}. La {\bf décision rationnelle} est celle qui recherche toute l'information disponible - décider en connaissance de cause.\\ \\Pendant les années 70 et jusqu'au début des années 80, l'intelligence artificielle est essentiellement représentée par les {\bf systèmes experts}, caractérisés par une approche formelle de la connaissance. La connaissance est vue comme une donnée, manipulée par un outil de déduction logique, le moteur d'{\bf inférence}. Les systèmes experts s'appuient sur la logique formelle, d'ordre 0 ou d'ordre 1, mais toujours caractérisés par une {\bf causalité déterministe}. À partir de données (faits connus P) et de règles (Si P alors Q), ils peuvent déduire de nouveaux faits (Q) en utilisant pour l'essentiel le syllogisme comme règle d'inférence : si P est vrai (fait ou prémisse) et si l'on sait que P implique Q (règle) alors, Q est vrai (nouveau fait ou conclusion).\\
+\\Au début des années 90, l'utilisation des systèmes experts a commencé à {\bf décliner} ; ce déclin tenant, selon nous, à la difficulté du recueil d'expertise sous contrainte déterministe. Autrement dit, et pour l'avoir longuement pratiqué à l'époque, il est très difficile, sinon illusoire, de contraindre un expert à formuler une règle déterministe. En effet, les règles exprimées par des experts sont souvent valides dans un domaine limité. Autrement dit, elles tolèrent les exceptions. Les experts se trouvent alors dans une situation fort inconfortable. En effet, soit ils expriment des règles fausses car partielles - mais le système expert ne sait pas en tenir compte - soit ils doivent identifier toutes les exceptions pour que leurs règles soient effectivement exactes, ce qui est matériellement impossible.\\
+\\À la fin des années 80, {\bf Judea Pearl}, chercheur américain de l'UCLA, a proposé une approche probabiliste de l'intelligence artificielle, appelée {\bf « réseaux bayesiens »}, qui visait précisément à dépasser les limites des systèmes experts et leur incapacité à prendre en compte l'{\bf incertitude} dans le raisonnement. Cette approche intègre en un formalisme très simple l'approche bayesienne des probabilités - la probabilité d'un événement dépend du niveau de connaissance de son contexte et d'une représentation de la causalité.\\
+\\En 1996, Steve Ballmer indiqua, dans Los Angeles Times, que selon Bill Gates, {\bf « les réseaux bayesiens étaient l'avantage concurrentiel de Microsoft »}
+
+\section{Domaines d'applications}
+
+Les applications des réseaux bayésiens peuvent être classées en trois grandes catégories correspondant, finalement, à des utilisations de la théorie bayesienne élémentaire.\\
+\begin{itemize}
+    \item {\bf Le diagnostic }: on utilise le modèle en cherchant à remonter des effets vers les causes.
+    \item {\bf Simulation} : on utilise le modèle en cherchant à évaluer les conséquences de certaines hypothèses.
+    \item {\bf Prise de décision} : on utilise le modèle pour fonder une décision en contexte incertain, c'est-à-dire que l'on cherche à maximiser une utilité espérée.\\
+\end{itemize}
+À ce premier axe de classification, on peut en ajouter un autre selon que le domaine est caractérisé par des observations rares et/ou coûteuses, ou si au contraire les données sont abondantes. Dans le premier cas, le modèle sera construit par un expert et l'application considérée sera son utilisation. Dans le deuxième cas, le modèle sera construit à partir de données expérimentales. L'application pourra alors se limiter à observer le modèle obtenu, qui est finalement une excellente synthèse des données. Un modèle obtenu par apprentissage peut bien sûr être utilisé sur de nouvelles données.\\
+\\Les situations mixtes sont évidemment possibles : domaines où de nombreuses données expérimentales cohabitent avec un vaste corpus théorique. L'une des applications les plus banales est l'{\bf antispam} qui décide de la probabilité qu'un email soit ou non indésirable, selon un certain nombre de critères. Même si la technologie utilisée est en général plus rudimentaire que celle des réseaux bayesiens (on parle de filtre bayesien ou de modèle bayesien naïf), c'est sans doute grâce à cette application qu'un ordinateur personnel ou serveur applique tous les jours le théorème de Bayes pour une décision que l'on peut qualifier d'{\bf « intelligente »}.\\
+\\À l'autre extrême, ce que l'on peut considérer comme une évolution de la {\bf doctrine militaire américaine}, les EBO (Effect Based Operations ou « opérations basées sur les effets ») utilisent les réseaux bayesiens pour modéliser l'efficacité des actions menées, les possibles réactions de l'ennemi et envisager de façon globale les « effets » directs et indirects des opérations.\\
+\\Les applications à la génétique sont nombreuses : de ses utilisations en contexte judiciaire à l'identification de chaînes causales d'expression génétique, les réseaux bayesiens sont l'un des outils privilégiés de ce domaine dont la causalité et les probabilités sont les fondements.\\
+%\renewcommand{\labelitemi}{\textbullet}
+\begin{itemize}
+    \item {\bf Outils informatiques qui implémentent les réseaux bayésiens}
+    \\
+Les outils de réseaux sont relativement peu nombreux.\\	
+	\begin{itemize}
+		\item Hugin (www.hugin.com) : Le plus ancien et le plus performant créé par des anciens de l'université d'Aalborg au Danemark, parmi les fondateurs des réseaux bayesiens.
+		\item Netica (www.norsys.com) : créé et commercialisé par la société canadienne Norsys est un outil convivial et simple, particulièrement adapté aux développeurs d'applications.
+		\item BayesiaLab : (www.bayesia.com) créé par une société française implantée à Laval.
+		\item Elvira (http://leo.ugr. es/elvira/) :logiciel gratuit disponible à des fins universitaires et Agena (www. agena.co.uk), dont l'offre est orientée sur la gestion des risques, mais qui reste un outil relativement général de réseaux bayesiens.
+	\end{itemize}
+\end{itemize}	  
+\section{Exemple illustratif}  
+Soit un opérateur travaillant sur une machine risque de se blesser, s'il l'utilise mal. Ce risque dépend de l'expérience de l'opérateur et de la complexité de la machine. {\bf «Expérience»} et {\bf «Complexité»} sont deux facteurs déterminants de ce risque (FIGURE 1.1). Bien sûr, ces facteurs ne permettent pas de créer un modèle déterministe.
+\begin{figure}[H]
+	\center	
+	\includegraphics[scale=0.1]{fig1}
+	\caption{Stucture de causalité}
+\end{figure}
+Ce graphe peut être complété par des tables de probabilité (FIGURE 1.2). La table la plus importante est celle qui exprime la dépendance de l'accident à l'expérience de l'opérateur et à la complexité de la machine.
+\begin{figure}[H]
+	\center	
+	\includegraphics[scale=0.7]{tab}
+	\caption{table de probabilités}
+\end{figure}
+On comprend bien ici que la connaissance est partielle. Si l'utilisateur est expérimenté et la machine simple, il n'y aura sans doute pas d'accident (0,1\% de chances dans l'exemple ci-dessus). Mais le fait de conserver une probabilité résiduelle reconnaît le fait que tous les facteurs de risque ne sont pas pris en compte dans ce modèle.\\
+\\Le réseau bayesien représente donc à la fois la connaissance et la non connaissance du domaine. Ce qui est connu est représenté par la structure de causalité (le graphe). Ce qui n'est pas connu est matérialisé par des probabilités.
+
+\newpage
+\chapter{Etude des réseaux bayésiens}
+\section{Notions fondamentales}
+\subsection{Construction d'un graphe}
+Construire un réseau bayésien revient à :
+\begin{itemize}
+	\item Définir le graphe du modèle.
+	\item Définir les tables de probabilités de chaque variable, conditionnellement à ses                                                                                 causes.
+\end{itemize}
+Le graphe est aussi appelé la {\bf « structure »} du modèle, et les tables de probabilités ses {\bf « paramétres »}. \\
+Généralement, la structure est définie par des {\bf experts} et les tables de probabilités calculées à partir de {\bf données expérimentales}.\\ 
+Il est possible d'utiliser des algorithmes tels que les algorithmes génétiques pour construire le réseau.
+\subsection{Espace de recherche}
+
+L'espace de recherche est relatif aux nombre de variables bien sûr, mais aussi au nombre d'arcs et de valeurs. Au pire des cas, cet espace peut mesurer ${\bf  2^{nb variables} }$, lorsque toutes les variables sont binaires. De plus, il augmente si les variables ont de multiples valeurs (exemple : une variable fumeur peut avoir en valeurs : non, léger, gros). Cependant, cela signifie que toutes les variables sont dépendantes les unes des autres. Or, couramment, les variables ne sont pas dépendantes de toutes les autres, ce qui réduit considérablement la taille de l'espace de recherche.
+\subsection{Table de probabilités}
+Les tables de probabilités sont définies par des statistiques relatives au problème à résoudre (peuvent aussi être déterminées par des experts). Chacune des variables dispose d'une table de probabilités conditionnelles relatives aux variables causales dont elle dépend. Par exemple, l'alarme (FIGURE 2.1) peut se déclencher soit à cause d'un cambriolage, soit à cause d'un séisme. Les probabilités conditionnelles alarme sachant cambriolage ou/et séisme sont déduites en fonction des probabilités que tel ou tel événement survienne.
+\begin{figure}
+	\center
+	\includegraphics[scale=1]{tabProba}
+	\caption{exemple illustratif}
+\end{figure}
+\begin{figure}
+	\center
+	\includegraphics[scale=1]{tabProbaAlarme}
+	\caption{table des probabiltés correspondante}
+\end{figure}
+Lorsqu'une variable possède plusieurs valeurs, pour chacune d'elles est calculé les probabilités conditionnelles en fonction des événements causaux.
+\subsection{Inférence bayésienne}
+L'inférence bayésienne est basée sur l'utilisation d'énoncés probabilistes, qui dans le cas général sont trouvés par des experts étudiant un système qui leurs ait connu. Ces énoncés doivent être clairs et précis afin d'éviter toute confusion dans les relations de dépendance qui en découleront. L'inférence bayésienne est particulièrement utile dans les problèmes d'induction, car se basant sur des cas particuliers et n'a de validité qu'en terme probabiliste. Les méthodes bayésiennes se distinguent des méthodes dites standard par l'application systématique de règles formelles de transformation des probabilités. On cherche à induire sur un système bayésien aussi bien par le haut que par le bas, aussi bien les conséquences que les causes, du graphe de dépendance.
+ Les règles de la logique des probabilités utilisées sont les suivantes: 
+\begin{itemize}
+	\item La règle d'addition :
+	
+	\includegraphics[scale=0.5]{add}
+	\item La règle de multiplication : 
+	
+	\includegraphics[scale=0.5]{mult}
+\end{itemize}
+Le théorème de Bayes peut être dérivé simplement en mettant à profit la symétrie de la règle de multiplication\\
+\begin{center}
+\includegraphics[scale=0.5]{bayes}
+\end{center}
+Le théorème de Bayes permet d'inverser les probabilités. C'est-à-dire que si l'on connaît les conséquences d'une cause, l'observation des effets permet de remonter aux causes, c'est l'effet d'induction {\?bf « bottom-up »}. Sachant aussi qu'une lecture littéral du théorème de Bayes permet une induction {\bf « top-down »}, c'est à dire à partir des causes en déduire les conséquences. Mais il existe aussi un troisième type d'induction dit {\bf « explaining away »} ou comment réfuter une cause en en constant une autre, autrement dit partir d'une conséquence pour remonter aux causes, constater laquelle est vrai et réfuter les conséquences sous jacentes des autres causes.\\
+\\En résumé pour induire sur un réseau bayésien, il faut en premier lieu trouver les probabilités conditionnelles de chaque variable aléatoire avec lesquelles elles sont directement dépendantes. Ce que les experts font à partir des statistiques étudiées sur le système voulu. Puis partir de faits produits auxquels on appliquera une probabilité de 1 ou 0 sur le réseau bayésien suivant qu'ils identifient une variable à vrai ou faux dans celui ci. Et enfin par le biais de calcul respectant la règle d'addition et ou de multiplication précédemment décrite, on modifie les probabilités causales et ou conséquentes. La nouvelle probabilité obtenue est l'induction que l'on peut faire sur un réseau bayésien.
+\newpage
+\section{Méthodes de résolution}
+Les réseaux bayésiens ont été développés au début des années 1980 pour tenter de résoudre certains problèmes de prédiction et d'abduction, courants en intelligence artificielle. Dans ce type de tâche, il est nécessaire de trouver une interprétation cohérente des observations avec les données connues a priori.
+\subsection{Résolution par calcul des inférences}
+ L'inférence probabiliste signifie donc le calcul de {$p(Y \setminus X)$} où $X$ est un ensemble d'observations et $Y$ un ensemble de variables décrivant le problème et qui sont jugées importantes pour la prédiction ou le diagnostic.\\
+\\Le calcul d'inférence probabiliste étant en général {\bf NP-difficile}, deux types de méthodes ont été développés, il y a les approches {\bf complète} et {\bf approximative}.\\
+\\Il existe une classe de réseaux pour lesquels le calcul est réalisable : les polyarbres (Pour tout noeud x du graphe, x d-sépare ses voisins, et le fait qu'un noeud x d-séparé deux autres noeuds y et z implique que y et z sont indépendant si x est connu).\\
+
+\subsubsection{La D-Séparation}
+La d-séparation est un critère important qui permet de	caractériser graphiquement toutes les contraintes d'indépendance des lois $p$ qui peuvent être représentées par une même {\bf DAG(Direct Acyclic Graph)}. Donc il faut introduire la notion de graphes :\\
+\begin{itemize}
+\item Chaînes et chemins, simples ou composés.
+\item Parents, enfants, descendants, ancêtres etc.\\
+\end{itemize}
+Par une chaine de $X$ vers $Y$ transite une information bruitée : les sommets sont des vannes ouverts ou fermés. Une chaîne est dite ouverte si toutes les vannes sont ouvertes auquel cas la chaîne laisse passer l'information, inversement ou si l'une des vannes est bloquér, la chaîne est dite fermée.\\
+\\$\Rightarrow$ L'information qu'apporte $X$ sue $Y$ peut se voir comme la somme des flots d'information sur tous les chaînes ouvertes reliant $X$ à $Y$. 
+\subsubsection{Les méthodes complétes}
+
+Les premiers algorithmes d'inférence pour les réseaux bayésiens sont basés sur une architecture à passage de messages et ils étaient limités aux arbres. Dans cette technique, à chaque noeud est associé un processeur qui peut envoyer des messages de façon asynchrone à ses voisins jusqu'à ce qu'un équilibre soit atteint, en un nombre fini d'étapes. Cette méthode a été depuis étendue aux réseaux quelconques pour donner l'algorithme de l'{\bf arbre de jonction (JT)}. Cet algorithme s'applique en 4 étapes de transformation du graphe: Moralisation, Absorbé les faits mesuré, Triangulation, Construire l'arbre de Jonction. Et une étape d'induction : Transmettre les messages pour réaliser la cohérence. \\
+\\Le coût de l'algorithme JT est déterminé par la taille de la plus grande clique et est {\bf exponentiel} en espace, pour les graphes {\bf densément connectés} l'inférence peut être impraticable.\\
+
+Une autre méthode s'appelle le {\bf cut-set conditionning} : elle consiste à instancier un certain nombre de variables de manière à ce que le graphe restant forme un arbre. On procède à une propagation par messages sur cet arbre. Puis une nouvelle instanciation est choisie. On réitère ce processus jusqu'à ce que toutes les instanciations possibles aient été utilisées. On fait alors la moyenne des résultats. L'avantage de cette méthode est une complexité en temps linéaire sur la taille du réseau, mais le calcul des probabilités conditionnelles est en général impraticable pour les réseaux assez grands car ayant une complexité dans le pire des cas exponentielle dans le nombre de variables et aussi à cause du problème des boucles dans le réseau.
+\subsubsection{Les méthodes approximatives}
+Il existe trois approches pour réaliser des inférence approchées, faire comme si le graphe était un arbre : « loopy belief propagation », Markov chain Monte Carlo ( e.g . échantillonnage de Gibbs), Inférence variationnelle.\\
+\\Markov chain Monte Carlo exploite la topologie du réseau et effectue un échantillonnage de Gibbs sur des sous-ensembles locaux de variables de façon séquentielle et concurrente. L'inférence variationnelle est une méthode de plus en plus utilisée, elle est une sorte d'adaptation de l'algorithme EM (Expectation-Maximization).
+\subsection{Résolution par apprentissage}
+Un deuxième axe de la recherche porte sur la {\bf construction automatique des modèles}. Il s'agit d'un sujet fascinant. En effet, si l'on y réfléchit, la notion de probabilité conditionnelle s'applique aussi aux modèles. De ce point de vue, la théorie bayesienne offre une réponse à l'un des aspects les plus critiques de la modélisation empirique qui est la dialectique entre observations et modèle. Dans la démarche empirique, un modèle est inféré par un scientifique à partir d'un a priori théorique validé par des observations, nombreuses ou bien choisies. Si, dans une situation particulière, une observation vient à contredire le modèle, on est conduit invariablement à l'une ou l'autre des conclusions : soit, le plus souvent, l'observation est rejetée comme insuffisamment fiable, soit le modèle est remis en question.\\
+\\Dans la mesure où les réseaux bayesiens ne sont pas déterministes mais probabilistes, ils tolèrent « l'erreur ». Un réseau bayesien ne fournit généralement pas de décision, mais seulement une conclusion probable. Si les faits le contredisent, il n'y a pas lieu de rejeter
+le modèle puisque la conclusion inverse était également possible, mais simplement moins probable. Cependant, si le modèle en vient à se tromper régulièrement, c'est-à-dire à donner souvent pour le plus probable un résultat qui n'est pas celui observé, on peut s'interroger sur sa validité. La théorie bayesienne s'applique parfaitement ici, en disant simplement que le modèle devient moins probable, par rapport à des modèles concurrents
+\newpage
+\chapter{Application du réseau bayésien}
+\section{Contexte de l'application}
+Il s'agit d'une prédiction à partir d'une collection des données des cas d'une étude qui a été menée entre 1958 et 1970 à l'Université de l'hôpital Billings de Chicago sur la survie de patients opérés d'un cancer.\\ 
+\\Les données contenues dans le dataset sont : 
+\begin{itemize}
+\item L'âge du patient au moment de l'opération (numérique).
+\item Année d'intervention du patient (numérique).
+\item Nombre de noeuds axillaires positifs détectés (numérique).
+\item Statut de survie (attribut de classe) : \\
+ $\rightarrow$ 1 = le patient a survécu 5 ans ou plus.\\
+ $\rightarrow$ 2 = le patient est décédé dans les 5 ans.
+\end{itemize}
+\section{Réalisation}
+\subsection{Outils et librairies utilisés}
+\subsubsection{librairies}
+\begin{itemize}
+\item {\bf NumPy} \\
+est une extension du langage de programmation Python, destinée à manipuler des matrices ou tableaux multidimensionnels ainsi que des fonctions mathématiques opérant sur ces tableaux. 
+Plus précisément, cette bibliothèque logicielle libre et open source fournit de multiples fonctions permettant notamment de créer directement un tableau depuis un fichier ou au contraire de sauvegarder un tableau dans un fichier, et manipuler des vecteurs, matrices et polynômes. \\ 
+\item {\bf Pandas} \\
+est une bibliothèque écrite pour le langage de programmation Python permettant la manipulation et l'analyse des données. Elle propose en particulier des structures de données et des opérations de manipulation de tableaux numériques et de séries temporelles.
+\newpage
+\item {\bf Matplotlib } \\
+est une bibliothèque du langage de programmation Python destinée à tracer et visualiser des données sous formes de graphiques4. Elle peut être combinée avec les bibliothèques python de calcul scientifique NumPy et SciPy.\\
+\item {\bf Scikit-learn} \\
+est une bibliothèque libre Python destinée à l'apprentissage automatique. Elle est développée par de nombreux contributeurs2 notamment dans le monde académique par des instituts français d'enseignement supérieur et de recherche comme Inria3 et Télécom ParisTech. Elle comprend notamment des fonctions pour estimer des forêts aléatoires, des régressions logistiques, des algorithmes de classification, et les machines à vecteurs de support. Elle est conçue pour s'harmoniser avec d'autres bibliothèques libres Python, notamment NumPy et SciPy. 
+\end{itemize}
+\subsubsection{Outils}
+\begin{itemize}
+\item {\bf Jupyter Notebook}\\
+est une application web utilisée pour programmer dans plus de 40 langages de programmation, dont Julia, Python, R, Ruby ou encore Scala2. Jupyter est une évolution du projet IPython. Jupyter permet de réaliser des calepins ou notebooks, c'est-à-dire des programmes contenant à la fois du texte en markdown et du code en Julia, Python, R... Ces notebooks sont utilisés en science des données pour explorer et analyser des données.
+\end{itemize}
+\subsection{Code source}
+\subsubsection{Input}
+\begin{figure}[H]
+\includegraphics[scale=0.6]{in1}
+\caption{Affichage des données lues à partir du dataset}
+\end{figure}
+\begin{figure}[H]
+\includegraphics[scale=0.6]{in2}
+\caption{Statistiques et constatations sur l'input}
+\end{figure}
+\vspace{1cm}
+\begin{itemize}
+\item mean : la moyenne des valeurs.\\
+\item std :  l'écart type de l'échantillon.\\
+\item min : minimum des valeurs dans le dataset.\\
+\item max : maximum des valeurs dans le dataset.\\
+\item 25\%, 50\%, 75\% : pourcentage des données analysés à partir du dataset.
+\end{itemize}
+\begin{figure}[H]
+\includegraphics[scale=0.6]{stats}
+\caption{Statistiques sur les patients}
+\end{figure}
+L'âge des patients varie de 30 à 83 ans avec une médiane de 52 ans.
+Bien que le nombre maximum de ganglions lymphatiques positifs observés soit de 52, près de 75\% des patients ont moins de 5 ganglions lymphatiques positifs et près de 25\% des patients n'ont pas de ganglions lymphatiques positifs.\\
+Le jeu de données ne contient qu'un petit nombre d'enregistrements (306).
+La colonne cible est déséquilibrée avec 73\% des valeurs sont «oui».
+\begin{figure}[H]
+\includegraphics[scale=0.6]{skel}
+\caption{Apprentissage}
+\end{figure}
+\newpage
+\chapter{Conclusion}
+L'approche bayesienne propose une définition de la probabilité, ainsi que des méthodes statistiques, alternatives à l'approche fréquentiste, encore universellement répandue. C'est une théorie bien fondée donnant un sens à des usages communs de la notion de probabilité et ne se heurtant pas aux difficultés conceptuelles de l'approche fréquentiste.\\
+\\Les réseaux bayésiens sont donc un outil de choix dans la représentation de connaissances et dans l'exploitation de celles-ci. Nous l'avons vu, beaucoup de domaines sont intéressés par ce type de représentation. Comme on a pu le voir, l'inférence sur les réseaux bayésiens est un problème NP-difficile, c'est pourquoi il était convenable de le voir de façon complète pour des instances réalisables et incomplète dans les autres cas.\\
+\\Pour aller plus loin, il pourrait être intéressant de se pencher sur les réseaux bayésiens dynamiques. Ceux ci sont une répétition du réseau classique dans lesquels on rajoute un lien causal d'un pas de temps à l'autre. Ils contiennent chacun un certain nombre de variables aléatoires représentant les observations et les états cachés du processus. Le temps ici est discret et chaque unité de temps représente une nouvelle observation, l?unité de temps n?a donc pas toujours la même valeur en temps réel, la complexité inférencielle des réseaux bayésiens dynamiques est évidement bien plus élevée que celle vu précédemment.
+%\end{itemize}
+
+%%
+% Bibliographie
+% \cleardoublepage % \nocite{*}
+%\newpage
+%\bibliographystyle{plain}
+%\addcontentsline{toc}{section}{\bibname}
+%\bibliography{fichierbib}
+
+\newpage
+{\bf Références}\\
+
+\url{https://www.cs.ubc.ca/~murphyk/Bayes/bnintro.html}\\
+
+\url{https://perso.liris.cnrs.fr/amille/enseignements/Master_PRO/TIA/RBayesiens/Intro_RB.pdf}\\
+
+\url{https://www.lri.fr/~antoine/Courses/IIE/WEB-ISX/Tr-SE-3-4.pdf}\\
+
+\url{http://www-clips.imag.fr/geod/User/jean.caelen/Publis_fichiers/Dossier%20Centraliens%20n%C2%B0%205931.pdf}
+
+
+
+\end{document}
